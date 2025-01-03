@@ -7,7 +7,7 @@
 
 🌏 **Chinese Web Demo:** https://modelscope.cn/studios/vickywu1022/CHRONOS
 
-<img src="/Users/weiqiwu/CHRONOS/img/demo.gif" alt="demo" style="zoom:50%;" />
+<img src="img/demo.gif" alt="demo" style="zoom:50%;" />
 
 ## 🚀Overview
 
@@ -26,7 +26,7 @@ We release our Open-TLS dataset for open-domain Timeline Summarization.
 The target news query is presented in `news_keywords.py` and the ground truth timeline is presented in `data/open/{NEWS_KEYWORD}/timelines.jsonl` following the below format:
 
 ```json
-[[Date|"YYY-MM-DDT00:00:00", [Events|"", "", ...]], ...]
+[["YYY-MM-DDT00:00:00", ["", "", ...]], ...]
 ```
 
 Statistics of Open-TLS are:![open](img/open.png)
