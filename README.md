@@ -15,7 +15,7 @@
 - We construct an **up-to-date dataset for open- domain TLS**, which surpasses existing public datasets in terms of both size and the duration of timelines.
 - Experiments demonstrate that our method is effective on open-domain TLS and achieves comparable results with state-of-the-art methods of closed-domain TLS, with significant improvements in **efficiency and scalability**.
 
-![overview](/Users/weiqiwu/CHRONOS/img/overview.png)
+![overview](img/overview.png)
 
 
 
@@ -26,7 +26,7 @@ We release our Open-TLS dataset for open-domain Timeline Summarization.
 The target news query is presented in `news_keywords.py` and the ground truth timeline is presented in `data/open/{NEWS_KEYWORD}/timelines.jsonl` following the below format:
 
 ```json
-[["YYY-MM-DDT00:00:00", ["", "", ...]], ...]
+[["YYY-MM-DDT00:00:00", ["", "", ""]]]
 ```
 
 Statistics of Open-TLS are:![open](img/open.png)
