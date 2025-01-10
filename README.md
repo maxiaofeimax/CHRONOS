@@ -77,10 +77,15 @@ JINA_API_KEY = "YOUR_API_KEY"
 
 #### Running Script
 
-To experiment with dataset `open`, run:
+To experiment with the Open-TLS dataset, run:
 
 ```python
-python main.py --model_name "$model" --max_round "$round" --dataset open --output "$output_dir" --question_exs
+python main.py \
+      --model_name "$model" \
+      --max_round "$round" \
+      --dataset open \
+      --output "$output_dir" \
+      --question_exs
 ```
 
 where `"$round"` is the maximum self-questioning round and `"$output_dir"` sets the output directory containing: (1) retrieved news, (2) generated timelines and (3) evaluation scores.
