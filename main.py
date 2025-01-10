@@ -25,7 +25,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--max_round', type=int, default=5, help='Rounds of Question')
-parser.add_argument('--model_name', type=str, default='Llama', help='Model')
+parser.add_argument('--model_name', type=str, default='qwen2.5-72b-instruct', help='Model')
 parser.add_argument('--dataset', type=str, choices=['open', 'crisis', 't17'], default='open', help='Dataset used')
 parser.add_argument('--rewrite_baseline', action='store_true')
 parser.add_argument('--question_exs', action='store_true')

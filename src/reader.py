@@ -11,7 +11,7 @@ from typing import Dict, List
 from copy import copy
 
 
-JINA_API_KEY = os.getenv('JINA_API_KEY')
+JINA_API_KEY = "YOUR_API_KEY"
 
 def read_pages(docs: List[Dict[str, str]], api='jina') ->List[Dict[str, str]]:
     results = []
@@ -32,7 +32,7 @@ def read_page(doc: Dict[str, str], api='damo') -> Dict[str, str]:
             if api == 'jina':
                 doc['content'] = read_page_jina(doc['url'])
             else:
-                raise ValueError(f'Unknown Readpage Api: {api}')
+                raise ValueError(f'Unknown Readpage API: {api}')
             return doc
         except Exception as e:
             logging.warning(f'Readpage failed: {str(e)}, retrying')

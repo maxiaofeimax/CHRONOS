@@ -43,19 +43,47 @@ pip install -r requirements.txt
 
 ### Step 2. Exampled Questions Generation
 
-The second step is to construct a topic-questions example pool for datasets in `data/` .
+The second step is to construct a topic-questions example pool for datasets in `data/`.
 
 ```python
 python question_exampler.py
 ```
 
-Or, you can use our provided `data/question_examples.json`, which contains examples for the *crisis, T17 and Open-TLS* datasets.
+Or, you can use our provided `data/question_examples.json`, which contains examples for the *Crisis, T17 and Open-TLS* datasets.
 
 ### Step 3. Running CHRONOS
 
-🔥 To be continued...
+We have released the code of CHRONOS to complete open-domain Timeline Summarization task. You may also refer to our [modelscope repo](https://modelscope.cn/studios/vickywu1022/CHRONOS/file/view/master?fileName=app.py&status=1) to build an app with `streamlit`.
 
+#### Replacing Keys
+Before running, please replace the placeholder with your own API keys in `src/model.py` to call either Qwen or GPT models.
 
+```python
+DASHSCOPE_API_KEY = "YOUR_API_KEY"
+OPENAI_API_KEY = "YOUR_API_KEY"
+```
+
+Please also replace it with your own BING Web Search API key in `src/searcher.py` to search news from the Internet. 
+
+```python
+BING_SEARCH_KEY = "YOUR_API_KEY"
+```
+
+If you want the CHRONOS to use the full page instead of only the snippet, please replace your own JINA key in `src/reader.py`.
+
+```python
+JINA_API_KEY = "YOUR_API_KEY"
+```
+
+#### Running Script
+
+To experiment with dataset `open`, run:
+
+```python
+python main.py --model_name "$model" --max_round "$round" --dataset open --output "$output_dir" --question_exs
+```
+
+where `"$round"` is the maximum self-questioning round and `"$output_dir"` sets the output directory containing: (1) retrieved news, (2) generated timelines and (3) evaluation scores.
 
 ## 📝 Citation
 

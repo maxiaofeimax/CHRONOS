@@ -5,6 +5,7 @@ import concurrent.futures
 import logging
 from typing import Dict, List
 
+BING_SEARCH_KEY =  "YOUR_API_KEY"
 
 def search(query_list: List[str], n_max_doc: int = 20, search_engine: str = 'bing', freshness: str = '') -> List[Dict[str, str]]:
     doc_lists = []
@@ -25,47 +26,39 @@ def search_single(query: str, search_engine: str, freshness: str = '') -> List[D
             search_results = bing_request(query, freshness=freshness)
             return bing_format_results(search_results)
         else:
-            search_results = local_request(query, search_engine)
-            return local_format_results(search_results)
+            raise ValueError(f'Unsupported Search Engine: {search_engine}')
     except Exception as e:
         logging.error(f'Search failed: {str(e)}')
         raise ValueError(f'Search failed: {str(e)}')
 
 
 def bing_request(query: str, count: int = 50, freshness: str = '') -> List[Dict[str, str]]:
-    """
-    Replace with your BING Search Function
-    """
-    pass
+    endpoint = "https://api.bing.microsoft.com/v7.0/search"
+    headers = {'Ocp-Apim-Subscription-Key': BING_SEARCH_KEY}
+    params = {'q': query, 'count': count, 'responseFilter': 'Webpages'}
+    try:
+        response = requests.get(endpoint, headers=headers, params=params)
+        response.raise_for_status()
+        data = response.json()
+        web_pages = data.get('webPages', {}).get('value', [])
+        return web_pages
 
+    except requests.exceptions.HTTPError as http_err:
+        print(f"HTTP error occurred: {http_err}")  
+    except Exception as err:
+        print(f"An error occurred: {err}")  
 
-def local_request(query: str, search_engine: str, freshness: str = "") -> List[Dict[str, str]]:
-    """
-    Replace with your Local Search Function (e.g., built with ElasticSearch)
-    """
-    pass
+    return []
 
 
 def bing_format_results(search_results: List[Dict[str, str]]):
     formatted_results = [
         {
-            'id': str(res.get('_id', '').split('.')[-1]),
-            'title': str(res.get('title', '')),
+            'id': str(rank + 1),
+            'title': str(res.get('name', '')),
             'snippet': str(res.get('snippet', '')),
             'url': str(res.get('url', '')),
-            'timestamp': str(res.get('timestamp_format', ''))[:10]
-        }
-        for rank, res in enumerate(search_results)
-    ]
-    return formatted_results
-
-
-def local_format_results(search_results: List[Dict[str, str]]):
-    formatted_results = [
-        {
-            'id': str(res.get('doc_id', '')),
-            'content': str(res.get('content', '')),
-            'timestamp': str(res.get('timestamp', ''))
+            'timestamp': str(res.get('dateLastCrawled', ''))[:10]
         }
         for rank, res in enumerate(search_results)
     ]
@@ -92,4 +85,4 @@ def _rearrange_and_dedup(doc_lists: List[List[Dict[str, str]]]) -> List[Dict[str
 if __name__ == '__main__':
     queries = ["egypt crisis timeline"]
     from pprint import pprint
-    pprint(search(queries, search_engine='crisis egypt', n_max_doc=30))
+    pprint(search(queries, search_engine='bing', n_max_doc=30))
