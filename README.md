@@ -104,3 +104,6 @@ where `"$round"` is the maximum self-questioning round and `"$output_dir"` sets 
 }
 ```
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Alibaba-NLP/CHRONOS&type=Date)](https://star-history.com/#Alibaba-NLP/CHRONOS&Date)
